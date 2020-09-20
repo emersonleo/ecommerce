@@ -9,5 +9,10 @@ class produtocontroller extends CI_Controller
 		parent::__construct();
 		$this -> load -> model('produto');
 	}
-	
+	public function listarProdutos(){
+		$result = $this -> produto -> buscarProdutos();
+		if($result){
+			$this -> output -> set_output(json_encode($result));
+		}
+	}
 }

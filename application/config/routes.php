@@ -68,4 +68,5 @@ $route['excluir'] = "usuariocontroller/excluirConta";
 $route['trocarlogin'] = "usuariocontroller/alterarLogin";
 $route['trocarsenha'] = "usuariocontroller/alterarSenha";
 
-$route['listarprodutos'] = 'produtocontroller/listarprodutos';
+
+$route['listarprodutos'] = 'produtocontroller/listarProdutos';

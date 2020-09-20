@@ -9,7 +9,7 @@
 			<div class="card" style="margin-top:1%">
 				<div class="card-body">
 					<h5 class="card-title" align="center"> Cadastre-se </h5>
-					<form id="formCadastro" method="post" action="#">
+					<form id="formCadastro" method="post" action="#" onsubmit="validarCampos()">
 							<div class="row" style="margin:1px">
 							<h6> Informações Pessoais </h6>
 							</div>
@@ -21,11 +21,11 @@
 								<input required type="text" name="datanasc" id="datanasc" class="form-control" placeholder="Data Nascimento">
 							</div>
 							<div class="form-group col-md-2">
-								<input required type="text" name="cpf" id="cpf" class="form-control" placeholder="CPF" maxlength="10">
+								<input required type="text" name="cpf" id="cpf" class="form-control" placeholder="CPF" maxlength="11">
 							</div>
 							<div class="form-group col-md-2">
 								<select class="btn btn-info" required>
-									<option selected disabled> Selecione seu gênero </option>
+									<option value="" selected disabled> Selecione seu gênero </option>
 									<option> Feminino </option>
 									<option> Masculino </option>
 									<option> Não-binário </option>
@@ -38,7 +38,7 @@
 							</div>
 							<div class="row">
 							<div class="form-group col-md-3">
-								<input required type="text" name="login" id="login" class="form-control" placeholder="Email">
+								<input required type="email" name="login" id="login" class="form-control" placeholder="Email">
 							</div>
 
 							<div class="form-group col-md-2">
@@ -88,7 +88,7 @@
 								<a style="padding: 0" class="col-md-12" id="linkLogin" href= <?php echo "'".base_url('login')."'"; ?> > Já possui uma conta? Acesse sua conta 
 								</a>
 							</div>
-						<button type="submit" id="btnCadastro" name="btnCadastro" class="btn btn-info form-group" style="margin-left: 47%"> Cadastrar </button>
+						<button type="type" id="btnCadastro" name="btnCadastro" class="btn btn-info form-group" style="margin-left: 47%"> Cadastrar </button>
 						</div>
 					</form>
 				</div>
@@ -113,21 +113,37 @@
 			)
 		})
 	})
+	function validarCampos(this){
+		this.preventDefault()
+		var senha = $("#senha")[0].value
+		var confirmarSenha = $("#confirmarSenha")[0].value
+		var cpf = $("#cpf")[0].value
+		var email = $("#login")[0].value
+		if(senha != confirmarSenha){			
+			document.getElementById("confirmarSenha").setCustomValidity("A confirmação de senha precisa ser igual a senha");
+			return false
+		}else if((cpf.length < 11) || !(parseInt(cpf))){
+			document.getElementById("cpf").setCustomValidity("O cpf precisa ter apenas numeros e 11 caracteres");
+			return false
+		}else{
+			return true
+		}
+	}
+	/*
 	$("#formCadastro").submit(function(e){
 		var senha = $("#senha")[0].value
-		var confirmarSenha = ("#confirmarSenha")[0].value
+		var confirmarSenha = $("#confirmarSenha")[0].value
 		var cpf = $("#cpf")[0].value
-		var email = $("#email")[0].value
-		console.log(cpf.length)
-		e.preventDefault()
-		if(senha != confirmarSenha){
+		var email = $("#login")[0].value
+		var padrão = e.isDefaultPrevented
+		if(senha != confirmarSenha){			
 			document.getElementById("confirmarSenha").setCustomValidity("A confirmação de senha precisa ser igual a senha");
-		}else{}
-		if(cpf.length > 11){
+			e.preventDefault()
+		}else if((cpf.length < 11) || !(parseInt(cpf))){
 			document.getElementById("cpf").setCustomValidity("O cpf precisa ter apenas numeros e 11 caracteres");
-		}else{}
-		if(!("@" in email)){
-			document.getElementById("cpf").setCustomValidity("O cpf precisa ter apenas numeros e 11 caracteres");
-		}else{}
-	})
+			e.preventDefault()
+		}else{
+			return true
+		}
+	})*/
 </script>

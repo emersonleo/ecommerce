@@ -12,10 +12,10 @@ class usuariocontroller extends CI_Controller{
 		$result = $this -> usuario -> buscarUsuario($login,$senha);
 		if($result){
 			$this -> session -> set_userdata("usuario_autorizado",$result -> row());
-			$this -> output -> set_output(base_url('inicio'));
+			redirect("inicio");
 		}else{
 			$this -> session -> set_flashdata("LOG001 - Usuário não localizado", true);
-			redirect('telainicial');
+			redirect('login');
 		}
 	}
 	public function cadastrar(){
