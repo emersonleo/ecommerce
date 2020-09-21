@@ -13,7 +13,7 @@ class produto extends CI_Model{
 		return $this -> db -> get() -> result();
 	}
 	public function listarCarrinho($id_usuario){
-		$this -> db -> select('*');
+		$this -> db -> select('produto.id, produto.nome, produto.preço, carrinho.quantidade_carrinho, quantidade, imagem');
 		$this -> db -> from("produto,usuario,carrinho");
 		$this -> db -> where("id_usuario", $id_usuario);
 		$this -> db -> where("produto.id = carrinho.id_produto");
