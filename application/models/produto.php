@@ -12,4 +12,11 @@ class produto extends CI_Model{
 		$this -> db -> where("quantidade >",0);
 		return $this -> db -> get() -> result();
 	}
+	public function listarCarrinho($id_usuario){
+		$this -> db -> select('*');
+		$this -> db -> from("produto,usuario,carrinho");
+		$this -> db -> where("id_usuario", $id_usuario);
+		$this -> db -> where("produto.id = carrinho.id_produto");
+		return $this -> db -> get() -> result();
+	}
 }

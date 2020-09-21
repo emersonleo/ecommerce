@@ -35,7 +35,7 @@ class usuariocontroller extends CI_Controller{
 		$this -> session -> set_flashdata("LOG001 - Usuário não localizado", null);
 		$this -> session -> set_flashdata("CAD001 - Não foi possível cadastrar", null);
 		$this -> session -> set_flashdata("CAD000 - Usuário cadastrado com sucesso", null);
-		redirect('login');
+		redirect('inicio');
 	}
 	public function excluirConta(){
 		$id = $this -> session -> userdata('usuario_autorizado') -> id_usuario;

@@ -15,4 +15,13 @@ class produtocontroller extends CI_Controller
 			$this -> output -> set_output(json_encode($result));
 		}
 	}
+	public function listarCarrinho(){
+		$id_usuario = $this -> session -> userdata("usuario_autorizado") -> id;
+		$result = $this -> produto -> listarCarrinho($id_usuario);
+		if($result){
+			$this -> output -> set_output(json_encode($result));
+		}else{
+			$this -> output -> set_output(null);
+		}
+	}
 }

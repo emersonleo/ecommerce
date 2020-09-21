@@ -14,12 +14,19 @@
 					          <?php 
 					          	if($this -> session -> userdata("usuario_autorizado")){
 					          		echo "Olá, ".$this -> session -> userdata("usuario_autorizado") -> nome;
-					          	} 
+					          	}else{
+					          		echo "Para acessar sua conta, clique aqui";
+					          	}
 					          ?> 
 					        </a>
 					        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-					          <a class="dropdown-item" href=<?php echo '"'.base_url('alterar').'"';?> >Carrinho</a>
-					          <a class="dropdown-item" id="btnDelete">Excluir Conta</a>
+					        	<?php 					        
+					        		if(!$this -> session -> userdata("usuario_autorizado")){
+					          			echo '<a class="dropdown-item" href="'.base_url("login").'"">Acessar conta</a>';
+					          		} 
+					          	?>
+					        	<a class="dropdown-item" href=<?php echo '"'.base_url('carrinho').'"';?> >Carrinho</a>
+					        	<!--<a class="dropdown-item" id="btnDelete">Excluir Conta</a>-->
 					        </div>
 				    	</li>
 				    	<li class="nav-item">
