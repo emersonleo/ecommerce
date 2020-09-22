@@ -1,4 +1,4 @@
-<header>
+ <header>
  		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Alterna navegação">
 		    <span class="navbar-toggler-icon"></span>
@@ -23,14 +23,19 @@
 					        	<?php 					        
 					        		if(!$this -> session -> userdata("usuario_autorizado")){
 					          			echo '<a class="dropdown-item" href="'.base_url("login").'"">Acessar conta</a>';
-					          		} 
+					          		}else{
+					          			echo "<a class='dropdown-item' href=".base_url('carrinho').">Carrinho</a>";
+					          			echo "<a class='dropdown-item' href=".base_url('#')."'>Pedidos</a>";
+					          		}
 					          	?>
-					        	<a class="dropdown-item" href=<?php echo '"'.base_url('carrinho').'"';?> >Carrinho</a>
-					        	<!--<a class="dropdown-item" id="btnDelete">Excluir Conta</a>-->
 					        </div>
 				    	</li>
 				    	<li class="nav-item">
-		    				<button id='btnSair' name="btnSair" class="btn btn-outline-danger form-inline"> Sair </button>
+					        <?php 					        
+					        	if($this -> session -> userdata("usuario_autorizado")){
+		    						echo "<button id='btnSair' name='btnSair' class='btn btn-outline-danger form-inline'> Sair </button>";
+		    					}
+		    					?>
 		    			</li>
 					</ul>
 				</div>

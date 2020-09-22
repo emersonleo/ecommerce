@@ -24,6 +24,13 @@
 	}
 	function addCarrinho(botao){
 		var produto = botao.getAttribute("data-id")
-		$.post(<?php echo "'".base_url('adicionaraocarrinho')."'";?>,{"produto":produto},function(data){})
+		<?php 
+			if($this -> session -> userdata("usuario_autorizado")){
+				echo '$.post('."'".base_url('adicionaraocarrinho')."'".',{"produto":produto},function(data){})';
+			}else{
+				echo "Swal.fire('Acesse sua conta para comprar ou adicionar itens ao carrinho', '', 'warning')"; //Inserir o Swal pedindo pro usuário logar antes de adicionar algo ao carrinho 
+			}
+		?>
+		
 	}
 </script>
