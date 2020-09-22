@@ -9,6 +9,10 @@ class usuario extends CI_Model{
 		$result = $this -> db -> get_where("usuario", array("login" => $login));
 		return $result;
 	}
+	public function buscarUsuarioPeloCpf($cpf){
+		$result = $this -> db -> get_where("usuario", array("cpf" => $cpf));
+		return $result;
+	}
 	public function buscarUsuario($login,$senha){
 		$busca = array('login' => $login, 'senha' => md5($senha));
 		$result = $this -> db -> get_where('usuario',$busca);
@@ -24,13 +28,11 @@ class usuario extends CI_Model{
 		$result = $this -> db -> get_where('usuario', array('id_usuario' => $id, 'senha' => md5($senha)));
 		return $result;
 	}
-	public function cadastrarUsuario($login,$senha){
-		$data = array("login" => $login, "senha" => md5($senha));
-		if($this -> buscarUsuarioPeloLogin($login) -> num_rows() > 0){
-			$result = false;
-		}else{
-			$result = $this -> db -> insert('usuario',$data);
-		}
+	public function cadastrarUsuario($login,$senha, $nome, $genero, $cep, $uf, $cpf, $datanasc, $cidade, $bairro, $logradouro, $numero, $complemento){
+		$datanasc = implode('-', array_reverse(explode('/', $datanasc)));
+		$data = array("login" => $login, "senha" => md5($senha), "nome" => $nome, "genero" => $genero, "cep" => $cep, "uf" => $uf, "cpf" => $cpf, 
+			"nascimento" => $datanasc, "cidade" => $cidade, "bairro" => $bairro, "logradouro" => $logradouro, "numero" => $numero, "complemento" => $complemento);
+		$result = $this -> db -> insert('usuario',$data);
 		return $result;
 	}
 	public function apagarConta($id,$senha){

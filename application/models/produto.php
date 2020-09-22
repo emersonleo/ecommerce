@@ -36,7 +36,7 @@ class produto extends CI_Model{
 	public function adicionarAoCarrinho($id_usuario,$id_produto){
 		$data = array('id_produto' => $id_produto, 
 						"id_usuario" => $id_usuario, 
-						"quantidade" => 1);
+						"quantidade_carrinho" => 1);
 		$this -> db -> insert("carrinho", $data);
 	}
 }

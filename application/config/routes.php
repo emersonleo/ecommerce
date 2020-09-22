@@ -67,4 +67,4 @@ $route['sair'] = 'usuariocontroller/sair';
 
 $route['listarprodutos'] = 'produtocontroller/listarProdutos';
 $route['listarcarrinho'] = 'produtocontroller/listarCarrinho';
-
+$route['adicionaraocarrinho'] = 'produtocontroller/adicionarAoCarrinho';

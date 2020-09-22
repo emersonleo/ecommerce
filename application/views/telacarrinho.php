@@ -36,6 +36,11 @@
 				</div>
 			</div>
 		</div>
+		<div class="card">
+			<div class="">
+				
+			</div>
+		</div>
 	</div>
 </div>
 <script type="text/javascript">
@@ -55,8 +60,8 @@
 		var tbodyNovo = ''
 		for (var i = 0; i <= Produtos.length - 1; i++) {
 			console.log(Produtos)
-			var tdProduto = "<td class='col-md-4'> <div class='row'> <img style='width:20%; height:20%; ' src=" + <?php echo '"'.base_url('assets/img/').'"';?> +Produtos[i].imagem + "> <h6 style='align-self:center; margin-left:2%'> " + Produtos[i].nome + " </h6> </div></td>" 
-			tbodyNovo += "<tr>" + tdProduto + "<td class='col-md-4'> <input class='col-md-2' type='number' value='" + Produtos[i].quantidade_carrinho + "'> </td> <td class='col-md-4'> <h6> R$ " + parseFloat(Produtos[i].preço).toFixed(2) + " </h6></td> </tr>"
+			var tdProduto = "<td class='col-md-3'> <div class='row'> <img style='width:20%; height:20%; ' src=" + <?php echo '"'.base_url('assets/img/').'"';?> +Produtos[i].imagem + "> <h6 style='align-self:center; margin-left:2%'> " + Produtos[i].nome + " </h6> </div></td>" 
+			tbodyNovo += "<tr>" + tdProduto + "<td class='col-md-3'> <input min='0' style='width:50%'type='number' value='" + Produtos[i].quantidade_carrinho + "'> </td> <td class='col-md-3'> <h6> R$ " + parseFloat(Produtos[i].preço).toFixed(2) + " </h6></td> </tr>"
 		}
 		$("#tbodyCarrinho")[0].innerHTML = tbodyNovo
 	}

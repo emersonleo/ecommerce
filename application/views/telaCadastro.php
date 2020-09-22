@@ -1,6 +1,12 @@
 <?php 
-	if($this -> session -> flashdata("CAD001 - Não foi possível cadastrar")){
-		echo "<script> Swal.fire('O Usuário informado já existe','Digite um novo nome de usuário ou acesse sua conta na página de login','error')</script>" ;
+	if($this -> session -> flashdata("CAD003 - Login cadastrado")){
+		echo "<script> Swal.fire('O Email informado já existe','Digite um novo email ou acesse sua conta na página de login','error')</script>" ;
+	}
+	else if($this -> session -> flashdata("CAD002 - Cpf cadastrado")){
+		echo "<script> Swal.fire('O cpf informado já existe','Digite um novo cpf ou acesse sua conta na página de login','error')</script>" ;
+	}
+	else if($this -> session -> flashdata("CAD001 - Não foi possível cadastrar")){
+		echo "<script> Swal.fire('Ocorreu um erro inesperado','Tente cadastrar-se novamente','error')</script>" ;
 	}
 ?>
 <div >
@@ -9,7 +15,7 @@
 			<div class="card" style="margin-top:1%">
 				<div class="card-body">
 					<h5 class="card-title" align="center"> Cadastre-se </h5>
-					<form id="formCadastro" method="post" action="#">
+					<form id="formCadastro" method="post" action=<?php echo "'".base_url("cadastrar")."'";?> >
 							<div class="row" style="margin:1px">
 							<h6> Informações Pessoais </h6>
 							</div>
@@ -77,7 +83,7 @@
 								<input required type="text" name="logradouro" id="logradouro" class="form-control" placeholder="Logradouro (Ex. Rua ABC)">
 							</div>
 							<div class="form-group col-md-2">
-								<input required type="text" name="numero" id="numero" class="form-control" placeholder="Número">
+								<input required type="number" name="numero" id="numero" class="form-control" placeholder="Número">
 							</div>
 							<div class="form-group col-md-3">
 								<input type="text" name="complemento" id="complemento" class="form-control" placeholder="Complemento(opcional)">
@@ -118,7 +124,6 @@
             }
     }, "Senha e Confirmação de Senha estão diferentes");
 	$("#formCadastro").validate({
-		debug:true,
 		rules:{
 			nome:{
 				required:true
@@ -162,6 +167,7 @@
     			required:true
     		},
     		numero:{
+    			number:177,
     			required:true
     		}
 		},
@@ -206,7 +212,8 @@
     			required:"Campo Obrigatório"
     		},
     		numero:{
-    			required:"Campo Obrigatório"
+    			required:"Campo Obrigatório",
+    			number: "Digite um número válido"
     		}
 		} 
 	})
