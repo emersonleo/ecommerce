@@ -9,22 +9,22 @@
 			<div class="card" style="margin-top:1%">
 				<div class="card-body">
 					<h5 class="card-title" align="center"> Cadastre-se </h5>
-					<form id="formCadastro" method="post" action="#" onsubmit="validarCampos()">
+					<form id="formCadastro" method="post" action="#">
 							<div class="row" style="margin:1px">
 							<h6> Informações Pessoais </h6>
 							</div>
-							<div class="row">
+							<div class="row"> 
 							<div class="form-group col-md-4">
 								<input required type="text" name="nome" id="nome" class="form-control" placeholder="Nome Completo">
 							</div>
 							<div class="form-group col-md-2">
-								<input required type="text" name="datanasc" id="datanasc" class="form-control" placeholder="Data Nascimento">
+								<input required type="text" name="datanasc" id="datanasc" class="form-control" placeholder="Data Nascimento ">
+							</div>
+							<div class="form-group col-md-2" id="cpf">
+								<input required type="text" name="cpf" id="cpf" class="form-control" placeholder="CPF (apenas número)" maxlength="11" minlength="11">
 							</div>
 							<div class="form-group col-md-2">
-								<input required type="text" name="cpf" id="cpf" class="form-control" placeholder="CPF" maxlength="11">
-							</div>
-							<div class="form-group col-md-2">
-								<select class="btn btn-info" required>
+								<select class="btn btn-info" id="genero" name="genero" required>
 									<option value="" selected disabled> Selecione seu gênero </option>
 									<option> Feminino </option>
 									<option> Masculino </option>
@@ -40,7 +40,6 @@
 							<div class="form-group col-md-3">
 								<input required type="email" name="login" id="login" class="form-control" placeholder="Email">
 							</div>
-
 							<div class="form-group col-md-2">
 								<input required type="password" name="senha" id='senha' class="form-control" placeholder="Senha">
 							</div>		
@@ -52,9 +51,9 @@
 							<h6> Endereço </h6>
 							</div>
 							<div class="row">
-							<div class="form-group col-md-2">
+							<div class="form-group col-md-3">
 								<div class="input-group mb-3">
-									  <input type="text" class="form-control" id="cep" name="cep" placeholder="CEP" aria-label="CEP" aria-describedby="button-addon2">
+									  <input type="text" class="form-control" id="cep" name="cep" placeholder="CEP (apenas números)" aria-label="CEP" aria-describedby="button-addon2" required>
 									  <div class="input-group-append">
 									    <button class="btn btn-outline-secondary" type="button" id="btnCEP" style="padding: 20%">
 									    	<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -97,6 +96,120 @@
 </div>
 
 <script type="text/javascript">
+	$.validator.addMethod("dateBR", function(value, element) {
+            if(value.length!=10) return false;
+            var data       = value;
+            var dia         = data.substr(0,2);
+            var barra1   = data.substr(2,1);
+            var mes        = data.substr(3,2);
+            var barra2   = data.substr(5,1);
+            var ano         = data.substr(6,4);
+            if(data.length!=10||barra1!="/"||barra2!="/"||isNaN(dia)||isNaN(mes)||isNaN(ano)||dia>31||mes>12)return false;
+            if((mes==4||mes==6||mes==9||mes==11) && dia==31)return false;
+            if(mes==2  &&  (dia>29||(dia==29 && ano%4!=0)))return false;
+            if(ano < 1900)return false;
+            return true;
+    }, "Digite uma data válida");
+    $.validator.addMethod("confirmacao", function(value, element) {
+            if(value != $("#senha")[0].value){
+            	return false
+            }else{
+            	return true;
+            }
+    }, "Senha e Confirmação de Senha estão diferentes");
+	$("#formCadastro").validate({
+		debug:true,
+		rules:{
+			nome:{
+				required:true
+			}, 
+			cpf:{
+				required:true,
+				number:true
+			}, 
+			datanasc:{
+				required:true,
+				dateBR:true
+			},
+			genero:{
+				required:true
+			},
+			login:{
+	       		required: true,
+	            email: true
+    		},
+    		senha:{
+    			required:true
+    		},
+    		confirmarSenha:{
+    			required:true,
+    			confirmacao:true
+    		},
+    		cep:{
+    			required:true,
+    			number:true
+    		},
+    		uf:{
+				required:true
+    		},
+    		cidade:{
+    			required:true
+    		},
+    		bairro:{
+    			required:true
+    		},
+    		logradouro:{
+    			required:true
+    		},
+    		numero:{
+    			required:true
+    		}
+		},
+		messages:{
+			nome:{
+				required:"Campo Obrigatório"
+			}, 
+			cpf:{
+				required:"Campo Obrigatório",
+				number: "Digite apenas números",
+				minlength:"O CPF informado possui menos de 11 caracteres"
+			}, 
+			datanasc:{
+				required:"Campo Obrigatório",
+			},
+			genero:{
+				required:"Campo Obrigatório"},
+			login:{
+	       		required: "Campo Obrigatório",
+	            email: "Insira um email válido"
+    		},
+    		senha:{
+    			required:"Campo Obrigatório"
+    		},
+    		confirmarSenha:{
+    			required:"Campo Obrigatório"
+    		},
+    		cep:{
+    			required:"Campo Obrigatório",
+    			number:"Digite apenas números"    			
+    		},
+    		uf:{
+				required:"Campo Obrigatório"
+    		},
+    		cidade:{
+    			required:"Campo Obrigatório"
+    		},
+    		bairro:{
+    			required:"Campo Obrigatório"
+    		},
+    		logradouro:{
+    			required:"Campo Obrigatório"
+    		},
+    		numero:{
+    			required:"Campo Obrigatório"
+    		}
+		} 
+	})
 	$("#btnCEP").click(function(){
 		var valorCEP = $("#cep")[0].value
 		$.get("https://viacep.com.br/ws/" + valorCEP +"/json/", function(data){
@@ -113,37 +226,9 @@
 			)
 		})
 	})
-	function validarCampos(this){
-		this.preventDefault()
-		var senha = $("#senha")[0].value
-		var confirmarSenha = $("#confirmarSenha")[0].value
-		var cpf = $("#cpf")[0].value
-		var email = $("#login")[0].value
-		if(senha != confirmarSenha){			
-			document.getElementById("confirmarSenha").setCustomValidity("A confirmação de senha precisa ser igual a senha");
-			return false
-		}else if((cpf.length < 11) || !(parseInt(cpf))){
-			document.getElementById("cpf").setCustomValidity("O cpf precisa ter apenas numeros e 11 caracteres");
-			return false
-		}else{
-			return true
-		}
-	}
-	/*
-	$("#formCadastro").submit(function(e){
-		var senha = $("#senha")[0].value
-		var confirmarSenha = $("#confirmarSenha")[0].value
-		var cpf = $("#cpf")[0].value
-		var email = $("#login")[0].value
-		var padrão = e.isDefaultPrevented
-		if(senha != confirmarSenha){			
-			document.getElementById("confirmarSenha").setCustomValidity("A confirmação de senha precisa ser igual a senha");
-			e.preventDefault()
-		}else if((cpf.length < 11) || !(parseInt(cpf))){
-			document.getElementById("cpf").setCustomValidity("O cpf precisa ter apenas numeros e 11 caracteres");
-			e.preventDefault()
-		}else{
-			return true
-		}
-	})*/
 </script>
+<style type="text/css">
+	.error{
+		color:#cc0000;
+	}
+</style>

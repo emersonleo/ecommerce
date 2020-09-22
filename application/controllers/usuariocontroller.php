@@ -1,6 +1,9 @@
 <?php 
 
 class usuariocontroller extends CI_Controller{
+	public function index(){
+		redirect("inicio");
+	}
 	public function __construct(){
 		parent::__construct();
 		$this -> load -> model('usuario');

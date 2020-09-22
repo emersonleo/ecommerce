@@ -24,4 +24,18 @@ class produtocontroller extends CI_Controller
 			$this -> output -> set_output(null);
 		}
 	}
+	public function adicionarAoCarrinho(){
+		$id_usuario = $this -> session -> userdata("usuario_autorizado") -> id;
+		$id_produto = $_POST["produto"];
+		$buscarNoCarrinho  = $this -> produto -> buscarProdutoCarrinho($id_produto,$id_usuario);
+		if($buscarNoCarrinho){
+			$this -> produto -> atualizarCarrinho("+",$id_usuario,$id_produto);
+		}else{
+			$this -> produto -> adicionarAoCarrinho($id_usuario,$id_produto);
+		}
+
+	}
+	public function aumentarItemNoCarrinho(){
+
+	}
 }
