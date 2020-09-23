@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `carrinho` (
   CONSTRAINT `FK_carrinho_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela ecommerce.carrinho: ~4 rows (aproximadamente)
+-- Copiando dados para a tabela ecommerce.carrinho: ~0 rows (aproximadamente)
 DELETE FROM `carrinho`;
 /*!40000 ALTER TABLE `carrinho` DISABLE KEYS */;
 /*!40000 ALTER TABLE `carrinho` ENABLE KEYS */;
@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `produto` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela ecommerce.produto: ~4 rows (aproximadamente)
+-- Copiando dados para a tabela ecommerce.produto: ~10 rows (aproximadamente)
 DELETE FROM `produto`;
 /*!40000 ALTER TABLE `produto` DISABLE KEYS */;
 INSERT INTO `produto` (`id`, `nome`, `descricao`, `imagem`, `categoria`, `preço`, `quantidade`) VALUES
@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 DELETE FROM `usuario`;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
 INSERT INTO `usuario` (`id`, `cep`, `login`, `senha`, `nome`, `sobrenome`, `cidade`, `uf`, `logradouro`, `bairro`, `numero`, `complemento`, `genero`, `cpf`, `nascimento`) VALUES
-	(3, '54800000', 'baoemerson15@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', 'Emerson Leonardo Oliveira de Lira', NULL, 'Moreno', 'PE', 'Rua Japão', 'Pedreira', 2, '', 'Masculino', '11839158450', '1998-10-12');
+	(3, '54800000', 'baoemerson15@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', 'Emerson Leonardo Oliveira de Lira', NULL, 'Moreno', 'PE', 'Rua Japão', 'Pedreira', 2, '', 'Masculino', '11111111111', '1998-10-12');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
