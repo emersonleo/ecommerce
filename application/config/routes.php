@@ -58,6 +58,7 @@ $route['login'] = "ctelas/telaLogin";
 $route['cadastro'] = "ctelas/telaCadastro";
 $route['inicio'] = "ctelas/telaInicial";
 $route['carrinho'] = "ctelas/telaCarrinho";
+$route['pedidos'] = 'ctelas/telaPedidos';
 
 //funções
 $route['acessar'] = 'usuariocontroller/acessar';
@@ -66,5 +67,7 @@ $route['sair'] = 'usuariocontroller/sair';
 
 
 $route['listarprodutos'] = 'produtocontroller/listarProdutos';
+$route['listarpedidos'] = 'produtocontroller/listarPedidos';
 $route['listarcarrinho'] = 'produtocontroller/listarCarrinho';
 $route['adicionaraocarrinho'] = 'produtocontroller/adicionarAoCarrinho';
+$route["comprar"] = "produtocontroller/comprar";

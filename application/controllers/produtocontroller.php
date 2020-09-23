@@ -24,6 +24,15 @@ class produtocontroller extends CI_Controller
 			$this -> output -> set_output(null);
 		}
 	}
+	public function listarPedidos(){
+		$id_usuario = $this -> session -> userdata("usuario_autorizado") -> id;
+		$result = $this -> produto -> listarPedidos($id_usuario);
+		if($result){
+			$this -> output -> set_output(json_encode($result));
+		}else{
+			$this -> output -> set_output(null);
+		}
+	}
 	public function adicionarAoCarrinho(){
 		$id_usuario = $this -> session -> userdata("usuario_autorizado") -> id;
 		$id_produto = $_POST["produto"];
@@ -37,5 +46,20 @@ class produtocontroller extends CI_Controller
 	}
 	public function aumentarItemNoCarrinho(){
 
+	}
+	public function comprar(){
+		$compra = $_POST["compra"];
+		$id_usuario = $this -> session -> userdata("usuario_autorizado") -> id;
+		foreach ($compra as $produto){
+			$validar = $this -> produto -> validarProduto($produto[0],$produto[1]);
+			if($validar -> num_rows() == 0){
+				$this -> output -> set_output(base_url("carrinho"));
+			}
+		}
+		foreach ($compra as $produto) {
+			$this -> produto -> removerCarrinho($id_usuario,$produto[0]);
+			$insert = $this -> produto -> comprar($id_usuario, $produto[0], $produto[1]);
+		}
+		$this -> output -> set_output(base_url("pedidos"));
 	}
 }

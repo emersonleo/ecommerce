@@ -25,7 +25,7 @@
 					          			echo '<a class="dropdown-item" href="'.base_url("login").'"">Acessar conta</a>';
 					          		}else{
 					          			echo "<a class='dropdown-item' href=".base_url('carrinho').">Carrinho</a>";
-					          			echo "<a class='dropdown-item' href=".base_url('#')."'>Pedidos</a>";
+					          			echo "<a class='dropdown-item' href=".base_url('pedidos').">Pedidos</a>";
 					          		}
 					          	?>
 					        </div>
